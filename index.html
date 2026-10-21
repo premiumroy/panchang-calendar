@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>पंचांग · Panchang Calendar — Vikram &amp; Shaka Samvat</title>
+<meta name="description" content="A liquid-glass Indian calendar: Vikram Samvat, Shaka Samvat, full Panchang, festivals, muhurats and events.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="grain"></div></div>
+
+<div id="app">
+  <header class="topbar glass">
+    <div class="brand">
+      <div class="mark">पं</div>
+      <div>
+        <h1 id="brandTitle">पंचांग <span style="font-weight:500;font-size:.8rem;color:var(--ink-soft)">Panchang</span></h1>
+        <div class="sub" id="brandSub">विक्रम संवत २०८३ · शक संवत १९४८</div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="iconbtn" id="prev" title="Previous">‹</button>
+      <button class="iconbtn" id="today" title="Today">•</button>
+      <div class="period" id="period">October 2026</div>
+      <button class="iconbtn" id="next" title="Next">›</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="seg" id="viewseg">
+      <button data-v="month" class="on">Month</button>
+      <button data-v="week">Week</button>
+      <button data-v="day">Day</button>
+      <button data-v="year">Year</button>
+    </div>
+    <select class="city" id="city" title="Location for sunrise &amp; muhurat"></select>
+    <button class="iconbtn" id="langBtn" title="Language">हि</button>
+    <button class="iconbtn" id="themeBtn" title="Theme">◐</button>
+    <button class="iconbtn" id="shareBtn" title="Share">↗</button>
+    <button class="primary" id="addBtn">+ Event</button>
+  </header>
+
+  <div class="main">
+    <section class="calwrap glass" id="calwrap">
+      <div class="cal-head" id="calhead"></div>
+      <div class="grid" id="grid"></div>
+      <div class="legend"><span>🪔 festival</span><span>• event</span></div>
+    </section>
+
+    <aside class="detail glass hide" id="detail">
+      <div class="dhead">
+        <button class="iconbtn close" id="closeDetail">✕</button>
+        <div class="gd" id="dGd">—</div>
+        <div class="hd" id="dHd">—</div>
+        <div class="sv" id="dSv"></div>
+      </div>
+      <div class="dbody" id="dBody"></div>
+    </aside>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2 id="modalTitle">Add event</h2>
+    <div class="field"><label>Title</label><input id="evTitle" placeholder="e.g. Diwali puja at home"></div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="evDate"></div>
+      <div class="field"><label>All day</label><select id="evAllDay"><option value="no">Timed</option><option value="yes">All day</option></select></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Start</label><input type="time" id="evStart" value="09:00"></div>
+      <div class="field"><label>End</label><input type="time" id="evEnd" value="10:00"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Repeat</label><select id="evRepeat">
+        <option value="none">Does not repeat</option><option value="daily">Daily</option>
+        <option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></div>
+      <div class="field"><label>Remind</label><select id="evRemind">
+        <option value="0">At start</option><option value="10">10 min before</option>
+        <option value="30">30 min before</option><option value="60">1 hour before</option><option value="-1">None</option></select></div>
+    </div>
+    <div class="field"><label>Notes</label><textarea id="evNotes" rows="2" placeholder="Optional"></textarea></div>
+    <div class="field"><label>Colour</label><div class="swatches" id="swatches"></div></div>
+    <div class="actions">
+      <button class="btn" id="evDelete" style="display:none;color:var(--rose)">Delete</button>
+      <button class="btn" id="evCancel">Cancel</button>
+      <button class="btn primary" id="evSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="astronomy.browser.min.js"></script>
+<script src="panchang.js"></script>
+<script src="festivals.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
